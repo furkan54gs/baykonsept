@@ -1,0 +1,145 @@
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div id="" class="span3">
+                {% if shoptotal==0 %}
+                    <div class="well well-small"><a id="myCart" href="{{ path('shopcart_index') }}"><img
+                                    src="{{ asset('themes') }}/images/ico-cart.png" alt="cart">Sepetinizde hiç ürün yok<span
+                                    class="badge badge-warning pull-right"></span></a></div>
+                {% else %}
+                    <div class="well well-small"><a id="myCart" href="{{ path('shopcart_index') }}"><img
+                                    src="{{ asset('themes') }}/images/ico-cart.png"
+                                    alt="cart">Sepetinizde {{ shoptotal }} ürün var<span
+                                    class="badge badge-warning pull-right">Satın Al</span></a></div>
+                {% endif %}
+                {% for cat in cats %}
+                    {{ cat|raw }}
+                {% endfor %}<br/>
+                <div class="well well-small">
+                    <p style="font-size:18px;background-color:#c31515 ;border-radius: 100px;color: #d5dfd1 " align="center"><b>İndirimdekiler</b></p>
+                    <p style="font-size:16px;" id="demo" align="center"></p>
+
+                    {% for rs in firsat %}
+                        <div class="thumbnail">
+                            <a href="{{ path ('product_detail',{'id':rs.id}) }}"><img width="130px"
+                                                                                      src="{{ asset('uploads') }}/images/{{ rs.image }}"
+                                                                                      alt=""/></a>
+                            <div class="caption">
+                                <h5>{{ rs.title }}</h5>
+                                <h4 style="text-align:center">
+                                    <form name="shopcart" action="{{ path('shopcart_new') }}" method="post">
+                                        <input name="shopcart[quantity]" type="hidden"  value="1"/>
+                                        <input type="hidden" name="shopcart[productid]" value="{{ rs.id }}"/>
+                                        <input type="hidden" name="token" value="{{ csrf_token('additem') }}"/>
+                                        <button type="submit" class="btn"><b>Sepete Ekle</b> <i
+                                                    class=" icon-shopping-cart"></i></button>
+                                        <a class="btn btn-primary" href="">{{ rs.price }} ₺</a>
+                                    </form></h4>
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div class="thumbnail">
+                    <img src="{{ asset('themes') }}/images/payment_methods.png" title="Bootshop Payment Methods"
+                         alt="Payments Methods">
+                    <div class="caption">
+                        <h5>Ödeme Yöntemleri</h5>
+                    </div>
+                </div>
+            </div>
+            <style>
+                ul#menu-v, #menu-v ul {
+                    width: 270px; /* Main Menu width */
+                    border: 1px solid rgba(190, 190, 190, 0.6);
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    z-index: 9;
+                }
+                #menu-v li {
+                    margin: 0;
+                    padding: 0;
+                    position: relative;
+                    background-color: #EFEFEF; /*fallback color*/
+                    background-color: rgba(238, 238, 238, 0.9);
+                    transition: background 0.5s;
+                }
+                #menu-v li:hover {
+                    background-color: rgba(204, 0, 0, 0.7);
+                }
+                #menu-v a {
+                    font-family: 'Ruda', sans-serif;
+                    font-size: 13px;
+                    border-top: 1px solid rgba(190, 190, 190, 0.6);
+                    display: block;
+                    color: #222222;
+                    font-weight: bold;
+                    text-decoration: none;
+                    line-height: 40px;
+                    padding-left: 22px;
+                    position: relative;
+                }
+                #menu-v li:first-child a {
+                    border-top: 0;
+                }
+                #menu-v a.arrow::after {
+                    content: '';
+                    position: absolute;
+                    display: inline;
+                    top: 50%;
+                    margin-top: -4px;
+                    right: 8px;
+                    border-width: 4px;
+                    border-style: solid;
+                    border-color: transparent transparent transparent white;
+                    transition: border-color 0.5s;
+                }
+                #menu-v li a.arrow:hover::after {
+                    border-color: transparent transparent transparent #CCCCCC;
+                }
+
+                /*Sub level menu items
+                ---------------------------------------*/
+                #menu-v li ul {
+                    min-width: 255px; /* Sub level menu min width */
+                    position: absolute;
+                    display: none;
+                    left: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                #menu-v li:hover > ul {
+                    display: block;
+                }
+            </style>
+            <script>
+                // Set the date we're counting down to
+                var countDownDate = new Date("{{ data[0].extime|date }}").getTime();
+
+                // Update the count down every 1 second
+                var x = setInterval(function () {
+
+                    // Get todays date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display the result in the element with id="demo"
+                    document.getElementById("demo").innerHTML = days + "gün " + hours + "s "
+                        + minutes + "d " + seconds + "sn ";
+
+                    // If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("demo").innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+            </script>

@@ -1,0 +1,22 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i>Server Admin Paneli</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <iframe name="iFrameadi" width=1100 height=800 src="https://srv17.aysima.net:2083/" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

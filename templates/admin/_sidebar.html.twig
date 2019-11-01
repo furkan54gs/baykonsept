@@ -1,0 +1,74 @@
+<!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+<!--sidebar start-->
+<aside>
+                <div id="sidebar" class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <p class="centered"><a href="{{ asset ('admin') }}"><img src="{{ asset ('admin') }}/img/admin_avatar.png" class="img-circle" width="80"></a></p>
+                        <h5 class="centered">{{ app.user.name }}</h5>
+                        <li class="mt">
+                        <a href="{{ path ('admin') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Anamenu</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-desktop"></i>
+                    <span>Siparisler</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ path('admin_orders_index',{'slug':'new'}) }}">Yeniler</a></li>
+                    <li><a href="{{ path('admin_orders_index',{'slug':'accepted'}) }}">Onaylananlar</a></li>
+                    <li><a href="{{ path('admin_orders_index',{'slug':'inshipping'}) }}">Kargodakiler</a></li>
+                    <li><a href="{{ path('admin_orders_index',{'slug':'canceled'}) }}">İptal Edilenler</a></li>
+                    <li><a href="{{ path('admin_orders_index',{'slug':'completed'}) }}">Tamamlananlar</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="{{ path ('admin_product') }}">
+                    <i class="fa fa-cogs"></i>
+                    <span>Urunler</span>
+                </a>
+            </li>
+
+
+            <li class="sub-menu">
+                <a href="{{ path ('admin_category') }}">
+                    <i class="fa fa-book"></i>
+                    <span>Kategoriler</span>
+                </a>
+
+            </li>
+            <li class="sub-menu">
+                <a href="{{ path ('admin_message') }}">
+                    <i class="fa fa-bar-chart-ofa fa-envelope"></i>
+                    <span>Mesajlar</span>
+                   {# <span class="label label-theme pull-right mail-info">{{ messages }}</span>#}
+                </a>
+
+            </li>
+
+            <li class="sub-menu">
+                <a href="{{ path ('admin_user') }}">
+                    <i class="fa fa-th"></i>
+                    <span>Uyeler</span>
+                </a>
+
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>Uye Yorumları</span>
+
+
+                </a>
+            </li>
+
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->

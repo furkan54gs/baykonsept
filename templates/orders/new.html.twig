@@ -1,0 +1,91 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Ürün Sepeti{% endblock %}
+{% block sidebar %}
+    {{ include ('home/_usersidebar.html.twig') }}
+{% endblock %}
+{% block content %}
+    <div class="span9">
+    <ul class="breadcrumb">
+        <li><a href="{{ path('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+        <li><a href="{{ path('shopcart_index') }}">ÜrünSepetim</a> <span class="divider">/</span></li>
+        <li class="active">SiparişOnay</li>
+    </ul>
+<div class="well well-small">
+    <form class="form-horizontal" name="orders" action="{{ path('orders_new') }}" method="post">
+        <fieldset>
+            <h3>Müşteri Bilgileri</h3><br>
+            <div class="control-group">
+                <label class="control-label" for="orders[name]">Adı Soyadı : </label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="orders[name]" name="orders[name]" value="{{ app.user.name }}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="orders[phone]">Telefon : </label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="orders[phone]" name="orders[phone]" value="{{ app.user.phone }}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="orders[city]">Şehir : </label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="orders[city]" name="orders[city]"  value="{{ app.user.city }}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="orders[address]">Adres : </label>
+                <div class="controls">
+                    <textarea class="input-xlarge" id="orders[address]" rows="3" name="orders[address]" style="height:65px"> {{ app.user.address }}</textarea>
+                </div>
+            </div>
+            <h3>Ödeme Bilgileri</h3><br>
+
+            <div class="control-group">
+                <p style="color: #c31515;font-weight: bold;font-size: 18px">Dikkat! Sipariş işleminiz sonrasında siparişiniz onaylanırsa</p>
+                <p style="color: #c31515;font-weight: bold;font-size: 18px">yetkili kişi tarafından tarafınıza ödeme işlemi hakkında bilgi verilecektir.</p>
+            </div>
+
+           {# <div class="control-group">
+                <label class="control-label" for="input04">Adı Soyadı : </label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input04" placeholder="Kartın üzerindeki ad-soyad">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input05">Kart No : </label>
+                <div class="controls">
+                    <input type="number" class="input-xlarge" id="input05" placeholder="Kartın üzerindeki no">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input06">Son kullanma tarihi : </label>
+                <div class="controls">
+                    <input type="date" class="input-xlarge" id="input06">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input07">CVC No : </label>
+                <div class="controls">
+                    <input type="number" class="input-xlarge" id="input07" placeholder="Kartın arkasındaki üç haneli no">
+                </div>
+            </div>
+            #}
+            <div class="control-group">
+                <label class="control-label" ><h4>Toplam :</h4> </label>
+                <div class="controls" style="margin-top: 1%">
+                        <input class="input-small" value="{{ total }}" style="background-color: #4bb929;font-size: 150%;text-align: center; font-weight: bold;" readonly><a style="font-weight: bold;font-size: 15px;">&nbsp;TL</a>
+                </div>
+            </div>
+
+            <input type="hidden" name="token" value="{{ csrf_token('form-order') }}"/>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-large btn-success">Siparişi Onayla</button>
+                <a href="{{ path('shopcart_index') }}" class="btn btn-large btn-warning" >Geri gel</a>
+            </div>
+        </fieldset>
+    </form>
+
+</div></div></div></div>
+{% endblock %}

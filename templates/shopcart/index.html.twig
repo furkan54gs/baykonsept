@@ -1,0 +1,60 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Ürün Sepeti{% endblock %}
+{% block sidebar %}
+    {{ include ('home/_usersidebar.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+            <li class="active">ÜrünSepetim</li>
+        </ul>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Id</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Fiyatı</th>
+                <th>Miktar</th>
+                <th>Toplam</th>
+                <th>Kaldır</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for shopcart in shopcarts %}
+                <tr>
+                    <td><img width="60" src="{{ asset('uploads') }}/images/{{ shopcart.image }}" alt=""/></td>
+                    <td>{{ shopcart.id }}</td>
+                    <td>{{ shopcart.title }}</td>
+                    <td>{{ shopcart.sprice }}</td>
+                    <td>{{ shopcart.quantity }}</td>
+                    <td>{{ shopcart.quantity * shopcart.sprice }}</td>
+                    <td class="column100 column8" data-column="column8"><a type="button" class="btn btn-warning"
+                                                                           href="{{ path ('shopcart_delete',{'id':shopcart.id}) }}" onclick="return confirm('Siparişi iptal etmek istediğinizden emin misiniz?')">Kaldır</a>
+                    </td>
+                </tr>
+                {% set total= total+ shopcart.total %}
+            {% else %}
+                <tr>
+                    <td style="alignment: center"><h3>Sepetinizde ürün yok</h3></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6" style="text-align:right"><strong>Toplam=</strong></td>
+                <td class="label label-important" style="display:block"> <strong> {{ total }} TL</strong></td>
+            </tr>
+            </tbody>
+        </table>
+        {% if shopcarts != null %}
+        <div class="btn-group"><a href="{{ path ('orders_new')}}">
+                <button class="btn btn-large btn-success" href="" >Siparişi Onayla </button></a>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            {{ include ('admin/messages.html.twig') }}
+            <div class="content-panel">
+                <div class="form-panel">
+                    <div class="form">
+                        <form class="cmxform form-horizontal style-form"
+                              action="{{ path('admin_message_update',{'id':message.id}) }}" method="post">
+                            <div class="form-group ">
+                                <label for="name" class="control-label col-lg-4">Adı</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ message.name }}</p>
+                                </div>
+                                <label for="email" class="control-label col-lg-4">Email</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ message.email }}</p>
+                                </div>
+                                <label for="subject" class="control-label col-lg-1">Konu</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ message.subject }}</p>
+                                </div>
+                                <label for="subject" class="control-label col-lg-1">Tarih</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ dateT|date('d-m-Y H:i:s') }}</p>
+                                </div>
+                                <label for="message" class="control-label col-lg-4">Mesaj</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ message.message }}</p>
+                                </div>
+                                <label for="subject" class="control-label col-lg-4">Tarih</label>
+                                <div class="col-lg-2">
+                                    <p class="form-control ">{{ dateT|date('d-m-Y H:i:s') }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="comment" class="control-label col-lg-4">Yorum</label>
+                                <div class="col-lg-2">
+                                   <textarea rows="5" cols="90" name="comment"
+                                             class="input-xlarge">{{ message.comment }}</textarea><br><br>
+                                    <input class="btn btn-theme" type="submit"/>
+                                    <a href="{{ path ('admin_message_delete',{'id':message.id}) }}" class="btn btn-warning"
+                                       onclick="CloseAndRefresh();">Sil</a></td>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}
+

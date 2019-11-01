@@ -1,0 +1,41 @@
+{% extends 'frontbase.html.twig' %}
+{% block title %}İletişim{% endblock %}
+{% block description %}{{ data[0].description }}{% endblock %}
+{% block keywords %}{{ data[0].keywords }}{% endblock %}
+
+{% block content %}
+    <div id="mainBody">
+        <div class="container">
+            {{ include ('admin/messages.html.twig') }}
+            <div class="row">
+                <div class="span6">
+                    {{ data[0].contact|raw }}
+                </div>
+                <div class="span4" style="padding-left: 200px;padding-top: 20px ">
+
+                    <h4>Bize Ulaşın</h4><br>
+                    <form class="form-horizontal" name="message" action="" method="post">
+                        <fieldset>
+                            <div class="control-group">
+                                <input type="text" name="message[name]" placeholder="name" class="input-xlarge" required/>
+                            </div>
+                            <div class="control-group">
+                                <input type="email" name="message[email]" placeholder="email" class="input-xlarge" required/>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" name="message[subject]" placeholder="subject" class="input-xlarge" required/>
+                            </div>
+                            <div class="control-group">
+                                <textarea rows="3" name="message[message]" id="textarea"
+                                          class="input-xlarge"></textarea>
+                            </div>
+                            <input type="hidden" name="message[status]" placeholder="status" class="input-xlarge" value="Yeni"/>
+                            <input type="hidden" name="token" value="{{ csrf_token('form-message') }}"/>
+                            <input class="btn btn-large" type="submit"/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

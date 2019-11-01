@@ -1,0 +1,54 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Siparişlerim{% endblock %}
+{% block sidebar %}
+    {{ include ('home/_usersidebar.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+            <li class="active">Siparişlerim</li>
+        </ul>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>İsim</th>
+                <th>Toplam</th>
+                <th>Telefon</th>
+                <th>Sipariş Tarihi</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.amount }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.createdat|date('d-m-Y H:i:s') }}</td>
+                    <td>{{ order.status }}</td>
+                    <td><a type="button" class="btn btn-info btn-small"
+                           href="{{ path ('orders_show',{'id':order.id}) }}">Detay</a>
+                 <a type="button" class="btn btn-warning btn-small"
+                           href="{{ path ('orders_delete',{'id':order.id}) }}" onclick="return confirm('Ürünü kaldırmak istediğinizden emin misiniz?')">İptal</a>
+                    </td>
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td style="alignment: center"><h3>Siparişiniz yok.</h3></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

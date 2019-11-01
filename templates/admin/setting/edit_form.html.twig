@@ -1,0 +1,161 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3>Settings</h3>
+            {{ include ('admin/messages.html.twig') }}
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Genel Bilgiler</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Email Server</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Hakkımızda Sayfası</a></li>
+                    <li><a data-toggle="tab" href="#menu3">İletişim Sayfası</a></li>
+                    <li><a data-toggle="tab" href="#menu4">Referanslar Sayfası</a></li>
+                    {#<li><a data-toggle="tab" href="#menu5">İndirim Tarihi</a></li>#}
+                </ul>
+                <div class="form-panel">
+                    <div class="form">
+                        <form class="cmxform form-horizontal style-form" id="signupForm" method="post"
+                              action="">
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="form-group ">
+                                        <label for="title" class="control-label col-lg-1">Title</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="title" name="setting[title]"
+                                                   value="{{ setting.title }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="description" class="control-label col-lg-1">Description</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="description" name="setting[description]"
+                                                   value="{{ setting.description }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="keywords" class="control-label col-lg-1">Keywords</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="keywords" name="setting[keywords]"
+                                                   value="{{ setting.keywords }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="company" class="control-label col-lg-1">Company</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="company" name="setting[company]"
+                                                   value="{{ setting.company }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="address" class="control-label col-lg-1">Address</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="address" name="setting[address]"
+                                                   value="{{ setting.address }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="fax" class="control-label col-lg-1">Fax</label>
+                                        <div class="col-lg-2">
+                                            <input class="form-control " id="fax" name="setting[fax]"
+                                                   value="{{ setting.fax }}" type="text">
+                                        </div>
+                                        <label for="phone" class="control-label col-lg-1">Phone</label>
+                                        <div class="col-lg-2">
+                                            <input class="form-control " id="phone" name="setting[phone]"
+                                                   value="{{ setting.phone }}" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu1" class="tab-pane fade">
+                                    <div class="form-group ">
+                                        <label for="email" class="control-label col-lg-1">Email</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="email" name="setting[email]"
+                                                   value="{{ setting.email }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="smtpserver" class="control-label col-lg-1">Smtpserver</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="smtpserver" name="setting[smtpserver]"
+                                                   value="{{ setting.smtpserver }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="smtppassword" class="control-label col-lg-1">Smtppassword</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="smtppassword" name="setting[smtppassword]"
+                                                   value="{{ setting.smtppassword }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="smtpport" class="control-label col-lg-1">Smtpport</label>
+                                        <div class="col-lg-5">
+                                            <input class="form-control " id="smtpport" name="setting[smtpport]"
+                                                   value="{{ setting.smtpport }}" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu2" class="tab-pane fade">
+                                    <div class="form-group ">
+                                        <div class="col-lg-9">
+                                            <textarea id="aboutus" name="setting[aboutus]" >{{ setting.aboutus }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu3" class="tab-pane fade">
+                                    <div class="form-group ">
+                                        <div class="col-lg-9">
+                                            <textarea id="contact" name="setting[contact]" >{{ setting.contact }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu4" class="tab-pane fade">
+                                    <div class="form-group ">
+                                        <div class="col-lg-9">
+                                            <textarea id="referances" name="setting[referances]" >{{ setting.referances }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#
+                                <div id="menu5" class="tab-pane fade">
+                                    <div class="form-group ">
+                                        <div class="col-lg-5">
+                                            <input class="form-control" id="extime" name="setting[extime]"
+                                                   value="{{ setting.extime|date }}" type="string">
+                                        </div>
+                                    </div>
+                                </div>
+                                #}
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-1 col-lg-5">
+                                    <button class="btn btn-theme" type="submit">Save</button>
+                                    <a href="{{ path ('admin_setting_index') }}" class="btn btn-theme04" type="button" >Cancel</a>
+                                </div>
+                                <label for="status" class="control-label col-lg-1 ">Status</label>
+                                <div class="col-lg-2">
+                                    <select name="setting[status]" class="form-control" value="{{ setting.status }}">
+                                        <option value="{{ setting.status }}" selected hidden>{{ setting.status }}</option>
+                                        <option>Aktif</option>
+                                        <option>Pasif</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}
+

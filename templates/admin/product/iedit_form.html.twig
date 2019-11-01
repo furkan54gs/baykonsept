@@ -1,0 +1,22 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3><b>{{ product.title }}</b></h3><br>
+            {% if product.image!=null %}
+                <img height="150" src="{{asset('uploads')}}/images/{{ product.image }}">
+                <div><br>&emsp;&emsp;&emsp;&emsp;<a href="{{ path ('admin_product_idel',{'id':id}) }}" class="fa fa-eraser btn btn-warning"
+                                                    onclick="return confirm('Silmek istediğinizden emin misiniz?');">Del</a></div>
+            {% endif %}
+            <form action="{{ path ('admin_product_iupdate',{'id':id}) }}" method="post" enctype="multipart/form-data">
+                <h4>Select image to upload:</h4><br>
+                <input type="file" name="imagename" id="fileToUpload" required><br>
+                <input type="submit" value="Upload Image" name="submit" ><br>
+            </form><br>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

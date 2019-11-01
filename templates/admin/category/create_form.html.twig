@@ -1,0 +1,69 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Kategori Ekle{% endblock %}
+
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3>Uye Ekleme</h3>
+            <div class="content-panel">
+                <div class="form-panel">
+                    <div class="form">
+                        <form class="cmxform form-horizontal style-form" id="signupForm" method="post" action="">
+                            <div class="form-group ">
+                                <label for="parentId" class="control-label col-lg-1 ">Parent Id</label>
+                                <div class="col-lg-5">
+                                    <select id="parentId" name="category[parentId]" class="form-control" type="number">
+                                        <option value="0">Ana Kategori</option>
+                                        {% for cat in pcatname %}
+                                                <option value="{{ cat.id }}">{{ cat.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="title" class="control-label col-lg-1">Title</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control " id="title" name="category[title]" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="keywords" class="control-label col-lg-1">Keywords</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control " id="keywords" name="category[keywords]" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="description" class="control-label col-lg-1">Description</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control " id="description" name="category[description]" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="status" class="control-label col-lg-1 ">Status</label>
+                                <div class="col-lg-5">
+                                    <select name="category[status]" class="form-control">
+                                        <option>Aktif</option>
+                                        <option>Pasif</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-1 col-lg-5">
+                                    <button class="btn btn-theme" type="submit">Save</button>
+                                    <a href="{{ path ('admin_category') }}" class="btn btn-theme04" type="button" >Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

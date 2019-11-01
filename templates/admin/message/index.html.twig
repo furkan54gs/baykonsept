@@ -1,0 +1,53 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Mesajlar{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <br>
+            <div class="table100 ver1 m-b-110">
+                <table data-vertable="ver1">
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Id</th>
+                        <th class="column100 column2" data-column="column2">Name</th>
+                        <th class="column100 column3" data-column="column3">Email</th>
+                        <th class="column100 column4" data-column="column4">Subject</th>
+                        <th class="column100 column5" data-column="column5">Message</th>
+                        <th class="column100 column6" data-column="column6">Comment</th>
+                        <th class="column100 column7" data-column="column7">Status</th>
+                        <th class="column100 column8" data-column="column8">Oku</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for message in message %}
+                        <tr class="row100">
+                            <td class="column100 column1" data-column="column1">{{ message.id }}</td>
+                            <td class="column100 column2" data-column="column2">{{ message.name }}</td>
+                            <td class="column100 column3" data-column="column3">{{ message.email }}</td>
+                            <td class="column100 column4" data-column="column4">{{ message.subject }}</td>
+                            <td class="column100 column5" data-column="column5">{{ message.message }}</td>
+                            <td class="column100 column6" data-column="column6">{{ message.comment }}</td>
+                            {% if message.status=="Okundu" %}
+                                <td class="column100 column7" data-column="column7"
+                                    style="color:#ff1f1a;">{{ message.status }}</td>
+                            {% elseif message.status=="Yeni" %}
+                                <td class="column100 column7" data-column="column7"
+                                    style="color:#17c505;">{{ message.status }}</td>
+                            {% endif %}
+                            <td class="column100 column8" data-column="column8"><a type="button" class="btn btn-info"
+                                                                                   href="javascript:openWin('{{ path ('admin_message_show',{'id':message.id}) }}','','toolbar=no,location=no,directories=0,status=no,top100,left=200,menuBar=no,scrollBars=no,resizable=no,width=700,height=600');">
+                                Oku</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

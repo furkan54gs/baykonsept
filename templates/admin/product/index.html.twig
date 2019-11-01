@@ -1,0 +1,85 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Ürün Listesi{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <br>
+            <a href="{{ path('admin_product_new') }}" class="fa fa-plus-square btn btn-primary">&nbsp; Ürün Ekleme</a>
+
+            <div class="table100 ver1 m-b-110">
+                <table data-vertable="ver1">
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Id</th>
+                        <th class="column100 column2" data-column="column2">Title</th>
+                        <th class="column100 column3" data-column="column3">Amnt</th>
+                        <th class="column100 column4" data-column="column4">Prc</th>
+                        <th class="column100 column5" data-column="column5">SPrc</th>
+                        <th class="column100 column6" data-column="column6">Min</th>
+                        <th class="column100 column7" data-column="column7">Image</th>
+                        <th class="column100 column8" data-column="column8">Galery</th>
+                        <th class="column100 column9" data-column="column9">Disc</th>
+                        <th class="column100 column10" data-column="column10">Cat</th>
+                        <th class="column100 column11" data-column="column11">Status</th>
+                        <th class="column100 column12" data-column="column12">Edit</th>
+                        <th class="column100 column13" data-column="column13">Del</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in product %}
+                        <tr class="row100">
+                            <td class="column100 column1" data-column="column1">{{ product.id }}</td>
+                            <td class="column100 column2" data-column="column2">{{ product.title }}</td>
+                            <td class="column100 column3" data-column="column3">{{ product.amount }}</td>
+                            <td class="column100 column4" data-column="column4">{{ product.price }}</td>
+                            <td class="column100 column5" data-column="column5">{{ product.sprice }}</td>
+                            <td class="column100 column6" data-column="column6">{{ product.min }}</td>
+                            <td class="column100 column7" data-column="column7" align="center">
+                                <a href="javascript:openWin('{{ path ('admin_product_iedit',{'id':product.id}) }}','','toolbar=no,location=no,directories=0,status=no,top100,left=200,menuBar=no,scrollBars=no,resizable=no,width=600,height=500');">
+                                    {% if product.image==null %}
+                                    <img src="{{ url ('admin') }}/img/addimage.png" height="32">
+                                    {% else %}
+                                    <img height="35" src="{{ asset('uploads') }}/images/{{ product.image }}">
+                                </a></td>
+                            {% endif %}
+                            <td class="column100 column8" data-column="column8">
+                                <a href="javascript:openWin('{{ path ('admin_image_new',{'pid':product.id}) }}','','toolbar=no,location=no,directories=0,status=no,top100,left=200,menuBar=no,scrollBars=no,resizable=no,width=900,height=600');">
+                                    <img src="{{ url ('admin') }}/img/galery.png" height="32">
+                                </a></td>
+
+                            {% if product.discount==0 %}
+                                <td class="column100 column9" data-column11="column9" style="color:#ff1f1a;">Yok</td>
+                            {% elseif product.discount==1 %}
+                                <td class="column100 column9" data-column="column9" style="color:#17c505;" >Var</td>
+                            {% endif %}
+
+                            <td class="column100 column10" data-column="column10">{{ product.ancestorId }}</td>
+
+                            {% if product.status=="Pasif" %}
+                                <td class="column100 column11" data-column11="column11"
+                                    style="color:#ff1f1a;">{{ product.status }}</td>
+                            {% elseif product.status=="Aktif" %}
+                                <td class="column100 column11" data-column="column11"
+                                    style="color:#17c505;">{{ product.status }}</td>
+                            {% endif %}
+                            <td class="column100 column12" data-column="column12"><a
+                                        href="{{ path ('admin_product_edit',{'id': product.id}) }}"
+                                        class="fa fa-edit btn btn-info">Edit</a></td>
+                            <td class="column100 column13" data-column="column13"><a
+                                        href="{{ path ('admin_product_delete',{'id':product.id}) }}"
+                                        class="fa fa-eraser btn btn-warning"
+                                        onclick="return confirm('Silmek istediğinizden emin misiniz?');">Del</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

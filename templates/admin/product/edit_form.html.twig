@@ -1,0 +1,135 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3>Ürün Düzenleme</h3>
+            <div class="content-panel">
+                {{ include ('admin/messages.html.twig') }}
+                <div class="form-panel">
+                    <div class="form">
+                        <form class="cmxform form-horizontal style-form" id="signupForm" method="post" action="">
+                            <div class="form-group ">
+                                <label for="title" class="control-label col-lg-1">Title</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control " id="title" name="product[title]" type="text" value="{{ product.title }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="keywords" class="control-label col-lg-1">Keywords</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="keywords" name="product[keywords]" type="text" value="{{ product.keywords }}" required>
+                                </div>
+                                <label for="description" class="control-label col-lg-1">Description</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="description" name="product[description]" type="text" value="{{ product.description }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="type" class="control-label col-lg-1">Type</label>
+                                <div class="col-lg-1">
+                                    <input class="form-control " id="type" name="product[type]" type="number" value="{{ product.type }}" required>
+                                </div>
+                                <label for="year" class="control-label col-lg-1">Year</label>
+                                <div class="col-lg-1">
+                                    <input class="form-control " id="year" name="product[year]" type="number" value="{{ product.year }}" required>
+                                </div>
+                                <label for="user_id" class="control-label col-lg-1">User Id</label>
+                                <div class="col-lg-1">
+                                    <input class="form-control " id="user_id" name="product[user_id]" type="number" value="{{ product.userId }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="ancestor_id" class="control-label col-lg-1">Ancestor</label>
+                                <div class="col-lg-2">
+                                    <select id="ancestor_id" name="product[ancestor_id]" class="form-control">
+                                        <option  value="{{ product.ancestorId }}" selected hidden>Categories</option>
+                                        {% for cat in catlist %}
+                                            {% if cat.parentid==0 %}
+                                                <option value="{{ cat.id }}">{{ cat.title }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <label for="discount" class="control-label col-lg-1 ">Discount</label>
+                                <div class="col-lg-2">
+                                    <select id="discount" name="product[discount]" class="form-control">
+                                        <option  value="{{ product.discount }}" selected hidden></option>
+                                        <option value="1">Var</option>
+                                        <option value="0">Yok</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="amount" class="control-label col-lg-1">Amount</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="amount" name="product[amount]" type="number" value="{{ product.amount }}" required>
+                                </div>
+                                <label for="min" class="control-label col-lg-1">Min</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="min" name="product[min]" type="number" value="{{ product.min }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="price" class="control-label col-lg-1">Price</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="price" name="product[price]" type="number" value="{{ product.price }}" required>
+                                </div>
+                                <label for="sprice" class="control-label col-lg-1">Sell Price</label>
+                                <div class="col-lg-2">
+                                    <input class="form-control " id="sprice" name="product[sprice]" type="number" value="{{ product.sprice }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="image" class="control-label col-lg-1">Image</label>
+                                <div class="col-lg-5">
+                                    <input class="form-control " id="image" name="product[image]" type="text" value="{{ product.image }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="category_id" class="control-label col-lg-1">Category</label>
+                                <div class="col-lg-5">
+                                    <select id="category_id" name="product[category_id]" class="form-control">
+                                        <option  value="{{ product.categoryId }}" selected hidden>Categories</option>
+                                        {% for cat in catlist %}
+                                            <option value="{{ cat.id }}">{{ cat.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="status" class="control-label col-lg-1 ">Status</label>
+                                <div class="col-lg-5">
+                                    <select id="status" name="product[status]" class="form-control" value="{{ product.status }}">
+                                        <option value="{{ product.status }}" selected hidden>{{ product.status }}</option>
+                                        <option>Aktif</option>
+                                        <option>Pasif</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="detail" class="control-label col-lg-1">Detail</label>
+                                <div class="col-lg-7">
+                                    <textarea id="detail" name="product[detail]">{{ product.detail }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-1 col-lg-5">
+                                    <button class="btn btn-theme" type="submit">Save</button>
+                                    <a href="{{ path ('admin_product') }}" class="btn btn-theme04" type="button" >Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

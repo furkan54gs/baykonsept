@@ -1,0 +1,112 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Sipariş Detayı{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper">
+            {{ include ('admin/messages.html.twig') }}
+            <div class="row mt">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="showback">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td>Sipariş Id:</td>
+                                <td>{{ order.id }}</td>
+                            </tr>
+                            <tr>
+                                <td>User Id:</td>
+                                <td>{{ order.userid }}</td>
+                            </tr>
+                            <tr>
+                                <td>Toplam:</td>
+                                <td>{{ order.amount }}</td>
+                            </tr>
+                            <tr>
+                                <td>Ad Soyad:</td>
+                                <td>{{ order.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Adres</td>
+                                <td>{{ order.addresss }}</td>
+                            </tr>
+                            <tr>
+                                <td>Şehir</td>
+                                <td>{{ order.city }}</td>
+                            </tr>
+                            <tr>
+                                <td>Telefon</td>
+                                <td>{{ order.phone }}</td>
+                            </tr>
+                            <form class="form-horizontal" name="orders" action="{{ path('admin_orders_update',{'id':order.id}) }}" method="post">
+                                <tr>
+                                    <td>Kargo:</td>
+                                    <td>
+                                        <div class="form-group">
+                        <textarea class="form-control" name="shipinfo" id="contact-message"
+                                  placeholder="Kargo Bilgileri"
+                                  rows="5">{{ order.shipinfo }}</textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Not:</td>
+                                    <td>
+                                        <div class="form-group">
+                        <textarea class="form-control" name="note" id="contact-message" placeholder="Notunuz"
+                                  rows="5">{{ order.note }}</textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Durum</td>
+                                    <td>
+                                        <select name="status" class="form-control">
+                                            <option value="{{ order.status }}" selected hidden>{{ order.status }}</option>
+                                            <option value="accepted">Onaylandı</option>
+                                            <option value="inshipping">Kargoda</option>
+                                            <option value="completed">Tamamlandı</option>
+                                            <option value="canceled">İptal</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <button type="submit" class="btn btn-block btn-success">Güncelle</button>
+                            </form>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Ürün Adı</th>
+                                <th>Fiyatı</th>
+                                <th>Miktar</th>
+                                <th>Toplam</th>
+                                <th>Durum</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for orderdetail in orderdetail %}
+                            <tr>
+                                <td>{{ orderdetail.id }}</td>
+                                <td>{{ orderdetail.name }}</td>
+                                <td>{{ orderdetail.price }}</td>
+                                <td>{{ orderdetail.quantity }}</td>
+                                <td>{{ orderdetail.amount }}</td>
+                                <td>{{ orderdetail.status }}</td>
+                            <tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock %}

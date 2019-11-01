@@ -1,0 +1,51 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Sipariş Listesi{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper site-min-height"><br>
+        <div class="table100 ver1 m-b-110">
+            <table data-vertable="ver1">
+                <thead>
+                <tr class="row100 head">
+                    <th class="column100 column1" data-column="column1">Id</th>
+                    <th class="column100 column2" data-column="column2">UserId</th>
+                    <th class="column100 column3" data-column="column3">Toplam</th>
+                    <th class="column100 column4" data-column="column4">İsim</th>
+                    <th class="column100 column5" data-column="column5">Adres</th>
+                    <th class="column100 column6" data-column="column6">Şehir</th>
+                    <th class="column100 column7" data-column="column7">Tel</th>
+                    <th class="column100 column8" data-column="column8">Not</th>
+                    <th class="column100 column9" data-column="column9">Durum</th>
+                    <th class="column100 column10" data-column="column10">Göster</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                <tr class="row100">
+                    <td class="column100 column1" data-column="column1">{{ order.id }}</td>
+                    <td class="column100 column2" data-column="column2">{{ order.userid }}</td>
+                    <td class="column100 column3" data-column="column3">{{ order.amount }}</td>
+                    <td class="column100 column4" data-column="column4">{{ order.name }}</td>
+                    <td class="column100 column5" data-column="column5">{{ order.addresss }}</td>
+                    <td class="column100 column6" data-column="column6">{{ order.city }}</td>
+                    <td class="column100 column7" data-column="column7">{{ order.phone }}</td>
+                    <td class="column100 column8" data-column="column8">{{ order.note }}</td>
+                    <td class="column100 column9" data-column="column9">{{ order.status }}</td>
+                    <td class="column100 column10" data-column="column10"> <a class="btn btn-info"
+                                href="javascript:openWin('{{ path ('admin_orders_show',{'id':order.id}) }}','','toolbar=no,location=no,directories=0,status=no,top100,left=200,menuBar=no,scrollBars=no,resizable=no,width=600,height=600');">
+                        Göster</a></td>
+
+                </tr>
+                {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- /wrapper -->
+</section>
+{% endblock %}

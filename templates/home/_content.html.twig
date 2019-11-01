@@ -1,0 +1,34 @@
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a href="{{ path ('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+        <li class="active">Ürünler</li>
+    </ul>
+    <ul class="thumbnails">
+        {% for rs in products %}
+            <li class="span3">
+                <div class="thumbnail">
+                    <a href="{{ path ('product_detail',{'id':rs.id}) }}"><img width="200px"
+                                                                              src="{{ asset('uploads') }}/images/{{ rs.image }}"
+                                                                              alt=""/></a>
+                    <div class="caption">
+                        <h5>{{ rs.title }}</h5>
+                        <h4 style="text-align:center">
+                            <form name="shopcart" action="{{ path('shopcart_new') }}" method="post">
+                                <input name="shopcart[quantity]" type="hidden" value="1"/>
+                                <input type="hidden" name="shopcart[productid]" value="{{ rs.id }}"/>
+                                <input type="hidden" name="token" value="{{ csrf_token('additem') }}"/>
+                                <button type="submit" class="btn"><b>Sepete Ekle</b> <i
+                                            class=" icon-shopping-cart"></i></button>
+                                <a class="btn btn-primary" href="">{{ rs.price }} ₺</a>
+                            </form>
+                        </h4>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+</div>
+</div>
+

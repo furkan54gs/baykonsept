@@ -1,0 +1,64 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}Uye Listesi{% endblock %}
+{% block top %}{% include ('admin/_top.html.twig') %}{% endblock %}
+
+{% block sidebar %}{% include ('admin/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper site-min-height"><br>
+
+            <a href="{{ path('admin_user_new') }}" class="fa fa-plus-square btn btn-primary">&nbsp; Uye Ekleme</a>
+
+            <div class="table100 ver1 m-b-110">
+                <table data-vertable="ver1">
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Id</th>
+                        <th class="column100 column2" data-column="column2">Name</th>
+                        <th class="column100 column3" data-column="column3">Email</th>
+                        <th class="column100 column4" data-column="column4">Type</th>
+                        <th class="column100 column5" data-column="column5">Status</th>
+                        <th class="column100 column6" data-column="column6">Edit</th>
+                        <th class="column100 column7" data-column="column7">Del</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in user %}
+                        <tr class="row100">
+                            <td class="column100 column1" data-column="column1">{{ user.id }}</td>
+                            <td class="column100 column2" data-column="column2">{{ user.name }}</td>
+                            <td class="column100 column3" data-column="column3">{{ user.email }}</td>
+                            {% for item in user.roles %}
+                                <td class="column100 column4" data-column="column4">{{ item }}</td>
+
+                                {% if user.status=="Pasif" %}
+                                    <td class="column100 column5" data-column="column5"
+                                        style="color:#ff1f1a;">{{ user.status }}</td>
+                                {% endif %}
+                                {% if user.status=="Aktif" %}
+                                    <td class="column100 column5" data-column="column5"
+                                        style="color:#17c505;">{{ user.status }}</td>
+                                {% endif %}
+                                <td class="column100 column6" data-column="column6"><a
+                                            href="{{ path ('admin_user_edit',{'id': user.id}) }}"
+                                            class="fa fa-edit btn btn-info">Edit</a></td>
+                                {% if item!="ROLE_ADMIN" %}
+                                    <td class="column100 column7" data-column="column7"><a
+                                                href="{{ path ('admin_user_delete',{'id':user.id}) }}"
+                                                class="fa fa-eraser btn btn-warning"
+                                                onclick="return confirm('Silmek istediğinizden emin misiniz?');">Del</a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+{% endblock %}

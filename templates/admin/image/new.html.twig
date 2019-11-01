@@ -1,0 +1,13 @@
+{% block title %}{% endblock %}
+<div class="row mt">
+{% for image in imagelist %}
+
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+   &nbsp;<img src="{{asset('uploads')}}/images/{{ image.image }}" height="150">&nbsp;
+      <div><br>&emsp;&emsp;&emsp;&emsp;<a href="{{ path ('admin_image_del',{'id':image.id,'pid':image.productid}) }}" class="fa fa-eraser btn btn-warning"
+                                 onclick="return confirm('Silmek istediğinizden emin misiniz?');">Del</a></div>
+   </div>
+{% endfor %}<br>
+</div>
+{{ include('admin/image/_form.html.twig') }}
+

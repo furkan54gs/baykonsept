@@ -1,0 +1,103 @@
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div id="" class="span3">
+                <ul id="menu-v">
+                    <li><a href="{{ path('user_panel') }}">Bilgilerim</a>
+                    <ul>
+                        <li><a href="{{ path('user_panel_edit') }}">Bilgilerimi Düzenle</a>
+                        </li>
+                    </ul></li>
+                    <li><a href="{{ path('shopcart_index') }}">Sepetim</a>
+                    </li>
+                    <li><a href="{{ path('orders_index') }}">Siparişlerim</a>
+                        {#
+                        <ul>
+                            <li><a href="">Bekleyenler</a>
+                            </li>
+                            <li><a href="">Onaylananlar</a>
+                            </li>
+                            <li><a href="">Geçmiş Siparişler</a>
+                            </li>
+                        </ul>#}
+                    </li>
+                    <li><a href="#">Yorumlarım</a>
+                    </li>
+                    <li><a href="#">Favorilerim</a>
+                    </li>
+                    <li><a href="{{ path('app_logout') }}">Çıkış</a>
+                    </li>
+                </ul>
+            </div>
+            <style>
+                ul#menu-v, #menu-v ul {
+                    width: 270px; /* Main Menu width */
+                    border: 1px solid rgba(190, 190, 190, 0.6);
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    z-index: 9;
+                }
+
+                #menu-v li {
+                    margin: 0;
+                    padding: 0;
+                    position: relative;
+                    background-color: #EFEFEF; /*fallback color*/
+                    background-color: rgba(238, 238, 238, 0.9);
+                    transition: background 0.5s;
+                }
+
+                #menu-v li:hover {
+                    background-color: rgba(204, 0, 0, 0.7);
+                }
+
+                #menu-v a {
+                    font-family: 'Ruda', sans-serif;
+                    font-size: 13px;
+                    border-top: 1px solid rgba(190, 190, 190, 0.6);
+                    display: block;
+                    color: #222222;
+                    font-weight: bold;
+                    text-decoration: none;
+                    line-height: 40px;
+                    padding-left: 22px;
+                    position: relative;
+                }
+
+                #menu-v li:first-child a {
+                    border-top: 0;
+                }
+
+                #menu-v a.arrow::after {
+                    content: '';
+                    position: absolute;
+                    display: inline;
+                    top: 50%;
+                    margin-top: -4px;
+                    right: 8px;
+                    border-width: 4px;
+                    border-style: solid;
+                    border-color: transparent transparent transparent white;
+                    transition: border-color 0.5s;
+                }
+
+                #menu-v li a.arrow:hover::after {
+                    border-color: transparent transparent transparent #CCCCCC;
+                }
+
+                /*Sub level menu items
+                ---------------------------------------*/
+                #menu-v li ul {
+                    min-width: 255px; /* Sub level menu min width */
+                    position: absolute;
+                    display: none;
+                    left: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                #menu-v li:hover > ul {
+                    display: block;
+                }
+            </style>

@@ -1,0 +1,55 @@
+{% extends 'frontbase.html.twig' %}
+{% block title %}Kullanıcı Bilgileri{% endblock %}
+{% block sidebar %}
+    {{ include ('home/_usersidebar.html.twig') }}
+{% endblock %}
+{% block content %}
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+            <li class="active">KullanıcıBilgileri</li>
+        </ul>
+    <div class="well">
+
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td>Id :</td>
+                <td>{{ app.user.id }}</td>
+            </tr>
+            <tr>
+                <td>İsim :</td>
+                <td>{{ app.user.name }}</td>
+            </tr>
+            <tr>
+                <td>Email :</td>
+                <td>{{ app.user.email }}</td>
+            </tr>
+            <tr>
+                <td>Yetki :</td>
+                <td>{{ app.user.roles|join }}</td>
+            </tr>
+            <tr>
+                <td>Adres :</td>
+                <td>{{ app.user.address }}</td>
+            </tr>
+            <tr>
+                <td>Şehir :</td>
+                <td>{{ app.user.city }}</td>
+            </tr>
+            <tr>
+                <td>Telefon :</td>
+                <td>{{ app.user.phone }}</td>
+            </tr>
+            <tr>
+                <td>Durum :</td>
+                <td>{{ app.user.status }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a href="{{ path('user_panel_edit') }}"><button class="btn btn-warning" >Güncelle</button></a></td>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

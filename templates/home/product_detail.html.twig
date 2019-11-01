@@ -1,0 +1,97 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}{{ data[0].title }}{% endblock %}
+{% block description %}{{ data[0].description }}{% endblock %}
+{% block keywords %}{{ data[0].keywords }}{% endblock %}
+{% block sidebar %}{% include ('home/_sidebar.html.twig') %}{% endblock %}
+
+{% block content %}
+            <div class="span9">
+                <ul class="breadcrumb">
+                    <li><a href="{{ path ('index') }}">AnaSayfa</a> <span class="divider">/</span></li>
+                    <li><a href="{{ path ('index') }}">Ürünler</a> <span class="divider">/</span></li>
+                    <li class="active">ÜrünDetayları</li>
+                </ul>
+                <div class="row">
+                    <div id="gallery" class="span3">
+                        <a href="{{ asset('uploads') }}/images/{{ data[0].image }}" title="{{ data[0].title }}">
+                            <img src="{{ asset('uploads') }}/images/{{ data[0].image }}" style="width:100%"
+                                 alt="{{ data[0].title }}"/>
+                        </a>
+                        <div id="differentview" class="moreOptopm carousel slide">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                {% for rs in galery %}
+
+                                    <a href="{{ asset('uploads') }}/images/{{ rs.image }}"> <img style="width:29%"
+                                                                                                 src="{{ asset('uploads') }}/images/{{ rs.image }}"
+                                                                                                 alt=""/></a>
+                                {% endfor %}
+                                </div>
+                                <div class="item">
+                                {% for rs in galery %}
+
+                                        <a href="{{ asset('uploads') }}/images/{{ rs.image }}"> <img style="width:29%"
+                                                                                                     src="{{ asset('uploads') }}/images/{{ rs.image }}"
+                                                                                                     alt=""/></a>
+
+                                {% endfor %}
+                            </div>
+                            </div>
+                          {#  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                            #}</div>
+
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <span class="btn"><i class="icon-envelope"></i></span>
+                                <span class="btn"><i class="icon-print"></i></span>
+                                <span class="btn"><i class="icon-zoom-in"></i></span>
+                                <span class="btn"><i class="icon-star"></i></span>
+                                <span class="btn"><i class=" icon-thumbs-up"></i></span>
+                                <span class="btn"><i class="icon-thumbs-down"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <h3>{{ data[0].title }}</h3>
+                        <small>{{ data[0].description }}</small>
+                        <hr class="soft"/>
+                        <form name="shopcart" class="form-horizontal qtyFrm" action="{{ path('shopcart_new') }}"
+                              method="post">
+                            <div class="control-group">
+                                <label class="control-label"><span>Fiyatı: </span></label>
+                                <label class="control-label"><span>{{ data[0].sprice }} TL</span></label>
+                                <div class="controls">
+                                    <label class="control-label"><span>Adet:</span></label>
+                                    <input name="shopcart[quantity]" type="number" class="span1" value="1"
+                                           max="{{ data[0].amount }}" placeholder="Adet"/>
+                                    <input type="hidden" name="shopcart[productid]" value="{{ data[0].id }}"/>
+                                    <input type="hidden" name="token" value="{{ csrf_token('additem') }}"/>
+                                    <button type="submit" class="btn btn-large btn-primary pull-right" style="margin-top: 10%">Sepete Ekle <i
+                                                class=" icon-shopping-cart"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr class="soft"/>
+                        <h4>{{ data[0].amount }} adet ürün kaldı</h4>
+                        <form class="form-horizontal qtyFrm pull-right">
+
+                        </form>
+                        <hr class="soft clr"/>
+                        <p>
+                            {{ data[0].detail|raw }}
+
+                        </p>
+
+                        <br class="clr"/>
+                        <a href="#" name="detail"></a>
+                        <hr class="soft"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
